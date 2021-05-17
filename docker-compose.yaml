@@ -1,0 +1,11 @@
+version: '2.1'
+services:
+  vertica:
+    image: jbfavre/vertica:9.2.0-7_debian-8
+    ports:
+      - 5433:5433
+
+  vertica-prom-exporter:
+    build:
+      context: .
+    image: ${DOCKER_REPO}/vertica-prometheus-exporter:${VERSION}

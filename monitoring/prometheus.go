@@ -26,6 +26,21 @@ func NewPrometheusMetrics(db sqlx.DB) []PrometheusMetric {
 	for _, usage := range NewPoolUsage(&db) {
 		metrics = append(metrics, usage)
 	}
+	for _, compliance := range NewComplianceStatus(&db) {
+  		metrics = append(metrics, compliance)
+  }
+  for _, failedTasks := range NewFailedTupleMoverTasks(&db) {
+    		metrics = append(metrics, failedTasks)
+  }
+  for _, queryDuration := range NewQueryDuration(&db) {
+      		metrics = append(metrics, queryDuration)
+  }
+  for _, queryQueued := range NewQueryQueued(&db) {
+        		metrics = append(metrics, queryQueued)
+  }
+  for _, queryFailed := range NewQueryFailed(&db) {
+          		metrics = append(metrics, queryFailed)
+  }
 	metrics = append(metrics, NewVerticaSystem(&db))
 
 	return metrics
