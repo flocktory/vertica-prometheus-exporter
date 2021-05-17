@@ -18,7 +18,7 @@ func NewQueryQueued(db *sqlx.DB) []QueryQueued {
 	SELECT
     pool_name,
     COUNT(transaction_id) as queued_queries_count,
-    MAX(TIMESTAMPDIFF(S, queue_entry_timestamp, CLOCK_TIMESTAMP())) as queued_queries_duration_second
+    MAX(TIMESTAMPDIFF(S, queue_entry_timestamp, CLOCK_TIMESTAMP()))::INT as queued_queries_duration_second
   FROM v_monitor.RESOURCE_QUEUES
   GROUP BY pool_name;
 	`

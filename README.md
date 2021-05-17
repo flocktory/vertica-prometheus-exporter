@@ -48,6 +48,12 @@ vertica_pool_running_query_count{node_name="v_docker_node0001", pool_name="gener
 vertica_pool_memory_inuse_kb{node_name="v_docker_node0001", pool_name="general"} 0
 vertica_pool_memory_borrowed_kb{node_name="v_docker_node0001", pool_name="general"} 0
 vertica_pool_memory_inuse_kb{node_name="v_docker_node0001", pool_name="sysquery"} 0
+vertica_compliance_utilization_percentage 100
+vertica_failed_tuple_mover_operations 7
+vertica_running_request_duration_s{user_name="dbadmin"} 100 
+vertica_failed_request_count{user_name="dbadmin"} 40
+vertica_queued_request_duration_s{pool_name="general"} 500
+vertica_queued_request_count{pool_name="general"} 45
 ```
 
 ## Build locally

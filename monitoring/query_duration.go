@@ -17,7 +17,7 @@ func NewQueryDuration(db *sqlx.DB) []QueryDuration {
 	sql := `
 	SELECT
     user_name,
-    MAX(TIMESTAMPDIFF(S, start_timestamp, CLOCK_TIMESTAMP())) as running_request_duration_second
+    MAX(TIMESTAMPDIFF(S, start_timestamp, CLOCK_TIMESTAMP()))::INT as running_request_duration_second
     FROM v_monitor.query_requests
     WHERE is_executing = 'true'
     GROUP BY user_name;

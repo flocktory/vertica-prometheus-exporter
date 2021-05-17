@@ -11,7 +11,7 @@ type FailedTupleMoverTasks struct {
 
 func NewFailedTupleMoverTasks(db *sqlx.DB) []FailedTupleMoverTasks {
 	sql := `
-	SELECT COALESCE(count(*),0) as failed_tasks
+	SELECT COALESCE(count(*),0)::INT as failed_tasks
   from tuple_mover_operations
   where operation_status = 'Abort';
 	`
