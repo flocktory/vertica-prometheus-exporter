@@ -1,0 +1,22 @@
+steps:
+  - label: 'get secret'
+    command:
+      - 'buildkite-agent meta-data set "secret" "\$SECRET_NAME"'
+    plugins:
+      - seek-oss/aws-sm#v2.3.1:
+          region: eu-west-1
+          env:
+            SECRET_NAME: "/prod/services/sonarqube"
+  - wait
+  - label: 'Pass secret'
+    commands:
+      - 'buildkite-agent meta-data set "key_private" $(buildkite-agent meta-data get secret | jq -r .staff)'
+  - wait
+  - label: "Sonar"
+    key: key_private
+    commands:
+      - "/opt/sonar-scanner/bin/sonar-scanner -X -Dsonar.login=$$SECRET_PRIV"
+    plugins:
+      - chronotc/metadata-env#v1.0.0:
+          keys:
+            - key_private=SECRET_PRIV
